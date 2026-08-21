@@ -1,0 +1,21 @@
+/* Polecenie, które wyświetli średnią wartość zamówienia (sales) dla każdego regionu dla kategorii 'Sprzęt audio' 
+od 1 kwietnia 2016 do 18 sierpnia 2026 r. (order_date). */
+
+SELECT
+  region,
+  AVG(sum_of_sales) AS average_sales_per_order
+FROM (
+  SELECT
+    region,
+    order_id,
+    SUM(CAST(sales AS FLOAT)) AS sum_of_sales
+  FROM swiatowy_potentat_sprzet_biurowy_10k_comma
+  WHERE
+    category = 'Sprzęt audio' 
+    AND CAST(order_date AS DATE) BETWEEN '2016-04-01' AND '2026-08-18'
+  GROUP BY
+  region,
+  order_id
+)
+GROUP BY
+  region

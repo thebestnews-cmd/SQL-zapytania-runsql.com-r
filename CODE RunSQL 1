@@ -1,0 +1,11 @@
+/* Zapytanie, dzięki któremu otrzymamy zestawienie wszystkich Klientów (customer_id oraz customer_name) z segmentu 
+Consumer, którzy dokonali zamówienia w Polsce w styczniu i w lutym 2016 r. (order_date). */
+
+SELECT DISTINCT
+  customer_id,
+  customer_name
+FROM swiatowy_potentat_sprzet_biurowy_10k_comma
+WHERE
+segment = 'Consumer'
+AND country = 'Polska'
+AND CAST (order_date AS DATE) BETWEEN'2016-01-01' AND '2016-02-29'
